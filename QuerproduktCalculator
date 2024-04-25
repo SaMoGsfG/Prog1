@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class QuerproduktCalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Geben Sie bitte eine Zahl ein: ");
+            if (scanner.hasNextInt()) {
+                int zahl = scanner.nextInt();
+
+                // Auf gültigkeit überprüfen
+                if (zahl >= 1 && zahl <= 1000000) {
+                    // Berechne das Querprodukt der Zahl
+                    int querprodukt = berechneQuerprodukt(zahl);
+                    System.out.println("Das Querprodukt der Zahl " + zahl + " beträgt " + querprodukt);
+                    break; // Beende die Schleife, da eine gültige Zahl eingegeben wurde
+                } else {
+                    System.out.println("FEHLER – Zahl ist ungültig.");
+                }
+            } else {
+                System.out.println("FEHLER – Ungültige Eingabe. Bitte geben Sie eine ganze Zahl ein.");
+                scanner.next(); // Verwerfe die ungültige Eingabe
+            }
+        }
+
+        scanner.close();
+    }
+
+    // Methode zur Berechnung des Querprodukts einer Zahl
+    private static int berechneQuerprodukt(int zahl) {
+        int querprodukt = 1;
+        while (zahl != 0) {
+            int letzteZiffer = zahl % 10;
+            querprodukt *= letzteZiffer;
+            zahl /= 10;
+        }
+        return querprodukt;
+    }
+}
